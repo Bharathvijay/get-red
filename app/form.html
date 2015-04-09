@@ -85,7 +85,7 @@
       </md-button>
       <div ng-show="error" class="formError">
         <ng-md-icon icon="error" style="fill:red" size="20"></ng-md-icon>
-        <span>The form is incomplete</span>
+        	{{ result.message }}
       </div>
       <md-progress-circular ng-show="loading" class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
     </section>

@@ -44,44 +44,15 @@ getBlood.controller('GetBloodCtrl', [
     }
 
     function validate(data) {
-      var result = {
-          "valid": true,
-          "message":" "};
-        
-        var regular_expression = /\S+@\S+\.\S+/;
-        
-        console.log("Evaluating mobile length:" + $scope.user.phone);
-        console.log("Name: " + $scope.user.name);
+      var result = true;
 
+      // FIXME: Perform better validation
       if (_.isEmpty(data.name) && _.isEmpty(data.phone) &&
           _.isEmpty(data.address) && _.isEmpty(data.group) &&
           _.isEmpty(data.quantity) && _.isEmpty(data.date)) {
-          result.valid = false;
-          result.message = "All the fields are empty";
-          return result;
-      } 
-        
-         if($scope.user.name.length < 3 ){
-         result.valid = false;
-         result.message = "Name field contains string either too short!"
-         return result;
+        result = false;
       }
-        
-        if(
-           validateName($scope.user.name)
-        ) {
-            result.valid = false;
-            result.message = "Name field contains illegal characters";
-            return result;
-        }
-        
-            
-        if($scope.user.phone.length != 10) {
-            console.log("Evaluating mobile length:" + bloodForm.phone);
-            result.valid = false;
-            result.message = "Enter a valid mobile phone number";
-            return result;
-        }    
+
       return result;
     }
   }
