@@ -25,9 +25,9 @@ getBlood.controller('GetBloodCtrl', [
     $scope.error = false;
 
     $scope.submit = function () {
-      var result = validate($scope.user);
+      var $scope.result = validate($scope.user);
 
-      if (result) {
+      if ($scope.result.valid) {
         $scope.error = false;
         $scope.loading = true;
 
@@ -57,18 +57,18 @@ getBlood.controller('GetBloodCtrl', [
           _.isEmpty(data.address) && _.isEmpty(data.group) &&
           _.isEmpty(data.quantity) && _.isEmpty(data.date)) {
           result.valid = false;
-          result.message = "All the fields are empty";
+          result.message = "The form is incomplete";
           return result;
       } 
         
-         if($scope.user.name.length < 3 ){
+         if(data.name.length < 3 ){
          result.valid = false;
          result.message = "Name field contains string either too short!"
          return result;
       }
         
         if(
-           validateName($scope.user.name)
+           validateName(data.name)
         ) {
             result.valid = false;
             result.message = "Name field contains illegal characters";
@@ -76,7 +76,7 @@ getBlood.controller('GetBloodCtrl', [
         }
         
             
-        if($scope.user.phone.length != 10) {
+        if(data.phone.length != 10) {
             console.log("Evaluating mobile length:" + bloodForm.phone);
             result.valid = false;
             result.message = "Enter a valid mobile phone number";
@@ -116,6 +116,7 @@ getBlood.config(['$mdThemingProvider', '$routeProvider',
       });
 }]);
 
+//This function checks whether the name has no alphanumeric characters 
 function validateName(name) {
       var iChars = "!@#$%^&*()+=-[]\';,./{}|<>?~_";
    for (var i = 0; i < name.length; i++) {
